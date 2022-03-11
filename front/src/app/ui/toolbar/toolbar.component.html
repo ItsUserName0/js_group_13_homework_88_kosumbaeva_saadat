@@ -13,7 +13,7 @@
 
 <ng-template #userMenu>
   <nav>
-    <span>Hello, <strong>{{ (user | async)?.['email'] }}</strong>!</span>&nbsp;
+    <span>Hello, <strong>{{ (user | async)?.['displayName'] }}</strong> !</span>&nbsp;
     <a routerLink="/posts/new" mat-button class="user-menu-btn">Add new post</a>&nbsp;
     <button mat-button (click)="logout()" class="user-menu-btn">Logout</button>
   </nav>

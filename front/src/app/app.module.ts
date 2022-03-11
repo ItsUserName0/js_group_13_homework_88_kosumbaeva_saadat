@@ -34,6 +34,8 @@ import { CommentComponent } from './ui/comment/comment.component';
 import { EditCommentComponent } from './ui/edit-comment/edit-comment.component';
 import { ValidateAvailabilityDirective } from './directives/validate-availability.directive';
 import { CommentsComponent } from './ui/comments/comments.component';
+import { postsReducer } from './store/posts.reducer';
+import { PostsEffects } from './store/posts.effects';
 
 const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -77,8 +79,8 @@ const metaReducers: MetaReducer[] = [localStorageSyncReducer];
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    StoreModule.forRoot({users: usersReducer}, {metaReducers}),
-    EffectsModule.forRoot([UsersEffects]),
+    StoreModule.forRoot({users: usersReducer, posts: postsReducer}, {metaReducers}),
+    EffectsModule.forRoot([UsersEffects, PostsEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]

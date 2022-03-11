@@ -1,7 +1,4 @@
 <div>
-  <app-post></app-post>
-  <app-post></app-post>
-  <app-post></app-post>
+  <app-post *ngFor="let p of (posts | async)"></app-post>
 </div>
 
-<app-post-details></app-post-details>

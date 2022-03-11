@@ -10,6 +10,7 @@ router.post('/', async (req, res, next) => {
     const userData = {
       email: req.body.email,
       password: req.body.password,
+      displayName: req.body.displayName,
     };
 
     const user = new User(userData);
@@ -48,6 +49,9 @@ router.post('/sessions', async (req, res, next) => {
 
     return res.send(user);
   } catch (e) {
+    if (e instanceof mongoose.Error.ValidationError) {
+      return res.status(422).send(e);
+    }
     return next(e);
   }
 });
@@ -56,6 +60,9 @@ router.get('/secret', auth, async (req, res, next) => {
   try {
     return res.send({message: 'Hello, ' + req.user.email});
   } catch (e) {
+    if (e instanceof mongoose.Error.ValidationError) {
+      return res.status(422).send(e);
+    }
     return next(e);
   }
 });
@@ -80,6 +87,9 @@ router.delete('/sessions', async (req, res, next) => {
 
     return res.send(message);
   } catch (e) {
+    if (e instanceof mongoose.Error.ValidationError) {
+      return res.status(422).send(e);
+    }
     return next(e);
   }
 })

@@ -6,7 +6,7 @@ module.exports = {
   rootPath,
   uploadPath: path.join(rootPath, 'public/uploads'),
   mongo: {
-    db: 'mongodb://localhost/project-template',
+    db: 'mongodb://localhost/forum',
     options: {useNewUrlParser: true},
   }
 };
