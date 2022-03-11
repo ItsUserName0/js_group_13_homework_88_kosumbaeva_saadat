@@ -1,0 +1,29 @@
+<h1>Add new post</h1>
+<mat-card>
+  <mat-card-content>
+    <form fxLayout="column" #f=ngForm (ngSubmit)="createPost()" [appValidateAvailability]="['description', 'image']">
+      <small class="error" *ngIf="description.touched && image.touched && f.errors?.['availability']">
+        Enter description or image!
+      </small>
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input name="title" matInput required ngModel #title="ngModel">
+        <mat-error *ngIf="title.touched && title.errors?.['required']">Enter the title!</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input name="description" matInput ngModel #description="ngModel">
+        <mat-hint>Enter a description or add a picture!</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Image</mat-label>
+        <app-file-input name="image" ngModel #image=ngModel></app-file-input>
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="flex-end">
+        <button type="submit" mat-raised-button color="primary"
+                [disabled]="f.invalid">Create post
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

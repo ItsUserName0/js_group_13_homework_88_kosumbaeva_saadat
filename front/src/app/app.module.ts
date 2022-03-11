@@ -26,6 +26,14 @@ import { UsersEffects } from './store/users.effects';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { ImagePipe } from './pipes/image.pipe';
+import { PostsComponent } from './pages/posts/posts.component';
+import { EditPostComponent } from './pages/edit-post/edit-post.component';
+import { PostDetailsComponent } from './pages/post-details/post-details.component';
+import { PostComponent } from './ui/post/post.component';
+import { CommentComponent } from './ui/comment/comment.component';
+import { EditCommentComponent } from './ui/edit-comment/edit-comment.component';
+import { ValidateAvailabilityDirective } from './directives/validate-availability.directive';
+import { CommentsComponent } from './ui/comments/comments.component';
 
 const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -45,6 +53,14 @@ const metaReducers: MetaReducer[] = [localStorageSyncReducer];
     CenteredCardComponent,
     FileInputComponent,
     ImagePipe,
+    PostsComponent,
+    EditPostComponent,
+    PostDetailsComponent,
+    PostComponent,
+    CommentComponent,
+    EditCommentComponent,
+    ValidateAvailabilityDirective,
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,
