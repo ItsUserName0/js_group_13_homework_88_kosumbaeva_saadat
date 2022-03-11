@@ -6,6 +6,7 @@ const config = require('../config');
 const Post = require('../models/Post');
 const auth = require('../middleware/auth');
 const path = require("path");
+const {promises: fs} = require("fs");
 
 const router = express.Router();
 
@@ -31,12 +32,6 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', auth, upload.single('image'), async (req, res, next) => {
   try {
-    // if (!req.body.title) {
-    //   return res.status(422).send({error: 'Title is required!'});
-    // } else if (!req.body.description && !req.file) {
-    //   return res.status(422).send({error: 'Description or image is required!'});
-    // }
-
     const postData = {
       user: req.user,
       title: req.body.title,
@@ -58,6 +53,9 @@ router.post('/', auth, upload.single('image'), async (req, res, next) => {
     return res.send(post);
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
+      if (req.file) {
+        await fs.unlink(req.file.path);
+      }
       return res.status(422).send(e);
     }
     return next(e);

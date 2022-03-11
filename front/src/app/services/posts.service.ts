@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Post, PostData } from '../models/post.model';
 
@@ -24,7 +24,6 @@ export class PostsService {
       }
     });
 
-    return this.http.post(environment.apiUrl + '/posts', formData);
-
+    return this.http.post(environment.apiUrl + '/posts', formData, {headers: new HttpHeaders({'Authorization': postData.token})});
   }
 }

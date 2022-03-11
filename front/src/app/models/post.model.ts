@@ -11,6 +11,8 @@ export interface Post {
 
 export interface PostData {
   [key: string]: any,
+
+  token: string,
   title: string,
   description: null | string,
   image: File | null,
@@ -20,7 +22,7 @@ export interface FieldError {
   message: string,
 }
 
-export interface PostDataError {
+export interface CreatePostError {
   errors: {
     description: FieldError,
     image: FieldError,

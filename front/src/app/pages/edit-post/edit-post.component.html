@@ -1,6 +1,10 @@
 <h1>Add new post</h1>
 <mat-card>
   <mat-card-content>
+    <div class="error" *ngIf="error | async">
+      <span *ngFor="let e of errors">{{ e }}</span>
+    </div>
+
     <form fxLayout="column" #f=ngForm (ngSubmit)="createPost()" [appValidateAvailability]="['description', 'image']">
       <small class="error" *ngIf="description.touched && image.touched && f.errors?.['availability']">
         Enter description or image!
@@ -20,8 +24,8 @@
         <app-file-input name="image" ngModel #image=ngModel></app-file-input>
       </mat-form-field>
       <div fxLayout="row" fxLayoutAlign="flex-end">
-        <button type="submit" mat-raised-button color="primary"
-                [disabled]="f.invalid">Create post
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid || (loading | async)">
+          Create post
         </button>
       </div>
     </form>

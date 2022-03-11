@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
+const path = require("path");
 const Schema = mongoose.Schema;
+
+const EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.apng', '.svg', '.webp'];
 
 const PostSchema = new Schema({
   user: {
@@ -14,9 +17,9 @@ const PostSchema = new Schema({
   description: {
     type: String,
     validate: {
-      validator: async function (value) {
-        if (value) return false;
-        else if (!value && this.image.value) return false;
+      validator: async function () {
+        if (this.description || this.image) return true;
+        else if (!this.description && !this.image) return false;
       },
       message: 'Description or image is required!',
     },
@@ -25,10 +28,10 @@ const PostSchema = new Schema({
     type: String,
     validate: {
       validator: function (value) {
-        if (value) return false;
-        else if (!value && this.description.value) return false;
+        const ext = path.extname(value);
+        return EXTENSIONS.includes(ext);
       },
-      message: 'Description or image is required!',
+      message: 'Image file format is incorrect!'
     }
   },
   date: {
