@@ -12,6 +12,10 @@
   <p>{{ postData.description }}</p>
 </div>
 
-<app-comments></app-comments>
+<ng-container *ngIf="postData">
+  <app-comments [post]="postData._id"></app-comments>
+</ng-container>
 
-<app-edit-comment></app-edit-comment>
+<ng-container *ngIf="postData">
+  <app-edit-comment [post]="postData._id"></app-edit-comment>
+</ng-container>

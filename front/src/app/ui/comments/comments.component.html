@@ -1,9 +1,7 @@
 <h1>Comments</h1>
 
 <ng-container *ngIf="true; else emptyComments">
-  <app-comment></app-comment>
-  <app-comment></app-comment>
-  <app-comment></app-comment>
+  <app-comment *ngFor="let c of commentsList" [comment]="c"></app-comment>
 </ng-container>
 
 <ng-template #emptyComments>

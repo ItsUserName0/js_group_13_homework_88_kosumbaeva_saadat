@@ -16,7 +16,7 @@ export class PostComponent implements OnInit {
 
   getDate() {
     const date = new Date(this.post.date);
-    return date.toLocaleString('kyr-KG');
+    return date.toLocaleString();
   }
 
 }
