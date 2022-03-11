@@ -2,15 +2,19 @@
   {{ error | async }}
 </div>
 
-<div *ngIf="postData">
-  <p>
-    <span>{{ postData.title }} </span><span class="text-muted">({{ postData.date }})</span>
-  </p>
-  <img
-    [src]="postData.image | image"
-    [alt]="'Photo of ' + postData.title"/>
-  <p>{{ postData.description }}</p>
-</div>
+<mat-spinner *ngIf="loading | async else postsArea"></mat-spinner>
+
+<ng-template #postsArea>
+  <div *ngIf="postData">
+    <p>
+      <span>{{ postData.title }} </span><span class="text-muted">({{ postData.date }})</span>
+    </p>
+    <img
+      [src]="postData.image | image"
+      [alt]="'Photo of ' + postData.title"/>
+    <p>{{ postData.description }}</p>
+  </div>
+</ng-template>
 
 <ng-container *ngIf="postData">
   <app-comments [post]="postData._id"></app-comments>

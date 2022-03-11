@@ -18,9 +18,13 @@ export class EditCommentComponent implements OnInit, OnDestroy {
   user: Observable<null | User>;
   userSub!: Subscription;
   token!: string | undefined;
+  loading: Observable<boolean>;
+  error: Observable<null | string>;
 
   constructor(private store: Store<AppState>) {
     this.user = store.select(state => state.users.user);
+    this.loading = store.select(state => state.comments.createLoading);
+    this.error = store.select(state => state.comments.createError);
   }
 
   ngOnInit(): void {

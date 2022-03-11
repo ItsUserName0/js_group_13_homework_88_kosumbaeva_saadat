@@ -26,7 +26,8 @@
         </mat-form-field>
         <div fxLayout="row" fxLayoutAlign="flex-end">
           <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid || (loading | async)">
-            Create post
+            <mat-spinner *ngIf="loading | async" diameter="25"></mat-spinner>
+            <span *ngIf="!(loading | async)">Create post</span>
           </button>
         </div>
       </form>

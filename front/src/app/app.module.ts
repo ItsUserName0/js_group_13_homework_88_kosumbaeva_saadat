@@ -38,6 +38,7 @@ import { postsReducer } from './store/posts.reducer';
 import { PostsEffects } from './store/posts.effects';
 import { commentsReducer } from './store/comments.reducer';
 import { CommentsEffects } from './store/comments.effects';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -83,6 +84,7 @@ const metaReducers: MetaReducer[] = [localStorageSyncReducer];
     MatSnackBarModule,
     StoreModule.forRoot({users: usersReducer, posts: postsReducer, comments: commentsReducer}, {metaReducers}),
     EffectsModule.forRoot([UsersEffects, PostsEffects, CommentsEffects]),
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

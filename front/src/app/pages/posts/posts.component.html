@@ -1,4 +1,10 @@
-<div>
-  <app-post *ngFor="let p of (posts | async)" [post]="p"></app-post>
+<div class="error" *ngIf="error | async">
+  {{ error | async }}
 </div>
+
+<mat-spinner *ngIf="loading | async else postsArea"></mat-spinner>
+
+<ng-template #postsArea>
+  <app-post *ngFor="let p of (posts | async)" [post]="p"></app-post>
+</ng-template>
 

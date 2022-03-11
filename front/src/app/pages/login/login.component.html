@@ -22,6 +22,8 @@
       <a routerLink="/register">Don't have an account? Sign up!</a>
     </div>
 
-    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid || (loading | async)">SIGN IN</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid || (loading | async)">
+      <mat-spinner *ngIf="loading | async" diameter="25"></mat-spinner>
+      <span *ngIf="!(loading | async)">SIGN IN</span></button>
   </form>
 </app-centered-card>

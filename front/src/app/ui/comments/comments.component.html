@@ -1,9 +1,17 @@
 <h1>Comments</h1>
 
-<ng-container *ngIf="true; else emptyComments">
-  <app-comment *ngFor="let c of commentsList" [comment]="c"></app-comment>
-</ng-container>
+<div class="error" *ngIf="error | async">
+  {{ error | async }}
+</div>
 
-<ng-template #emptyComments>
-  <p class="empty-comments">There are no comments on this news</p>
+<mat-progress-spinner *ngIf="loading | async else commentsArea"></mat-progress-spinner>
+
+<ng-template #commentsArea>
+  <ng-container *ngIf="true; else emptyComments">
+    <app-comment *ngFor="let c of commentsList" [comment]="c"></app-comment>
+  </ng-container>
+
+  <ng-template #emptyComments>
+    <p class="empty-comments">There are no comments on this news</p>
+  </ng-template>
 </ng-template>

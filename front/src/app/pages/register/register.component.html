@@ -22,7 +22,9 @@
              required matInput ngModel #password="ngModel">
       <mat-error *ngIf="password.touched && password.hasError('required')">Password is required!</mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid || (loading | async)">REGISTER
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid || (loading | async)">
+      <mat-spinner *ngIf="loading | async" diameter="25"></mat-spinner>
+      <span *ngIf="!(loading | async)">REGISTER</span>
     </button>
   </form>
 </app-centered-card>

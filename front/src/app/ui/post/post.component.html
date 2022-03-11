@@ -3,7 +3,7 @@
     <img [src]="post.image | image" [alt]="'Photo of ' + post.title" fxFlex="20%"/>
     <div fxFlex="80%">
       <div fxLayout="column">
-        <p fxFlex="40%" class="text-muted">{{ getDate() }} by {{ post.user.displayName }}</p>
+        <p fxFlex="40%"><span class="text-muted">({{ getDate() }})</span> &nbsp; by &nbsp; <strong>{{ post.user.displayName }}</strong></p>
         <a fxFlex="40%" [routerLink]="['posts', post._id]">{{ post.title }}...</a>
       </div>
     </div>
