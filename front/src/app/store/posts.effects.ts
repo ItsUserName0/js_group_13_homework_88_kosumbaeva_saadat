@@ -4,10 +4,10 @@ import { PostsService } from '../services/posts.service';
 import {
   createPostFailure,
   createPostRequest,
-  createPostSuccess,
+  createPostSuccess, fetchPostFailure, fetchPostRequest,
   fetchPostsFailure,
   fetchPostsRequest,
-  fetchPostsSuccess
+  fetchPostsSuccess, fetchPostSuccess
 } from './posts.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
@@ -25,7 +25,15 @@ export class PostsEffects {
     ofType(fetchPostsRequest),
     mergeMap(() => this.postsService.fetchPosts().pipe(
       map((posts) => fetchPostsSuccess({posts})),
-      catchError(() => of(fetchPostsFailure({error: 'Something went wrong!'}))),
+      catchError(() => of(fetchPostsFailure({error: 'Something went wrong while requesting a list of posts!'}))),
+    )),
+  ));
+
+  fetchPost = createEffect(() => this.actions.pipe(
+    ofType(fetchPostRequest),
+    mergeMap(({id}) => this.postsService.fetchPost(id).pipe(
+      map((post) => fetchPostSuccess({post})),
+      catchError(() => of(fetchPostFailure({error: 'Something went wrong while requesting a post!'}))),
     )),
   ));
 

@@ -1,10 +1,10 @@
 <mat-card>
   <mat-card-content fxLayout="row">
-    <img [src]="" [alt]="'Photo of '" fxFlex="20%"/>
+    <img [src]="post.image | image" [alt]="'Photo of ' + post.title" fxFlex="20%"/>
     <div fxFlex="80%">
-      <div fxLayout="row">
-        <p fxFlex="40%" class="text-muted">Date</p>
-        <a fxFlex="40%" [routerLink]="['news', 'id']">Title...</a>
+      <div fxLayout="column">
+        <p fxFlex="40%" class="text-muted">{{ getDate() }} by {{ post.user.displayName }}</p>
+        <a fxFlex="40%" [routerLink]="['posts', post._id]">{{ post.title }}...</a>
       </div>
     </div>
   </mat-card-content>

@@ -23,7 +23,7 @@ const upload = multer({storage});
 
 router.get('/', async (req, res, next) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find({}, null, {sort: {'_id': -1}}).populate('user');
     return res.send(posts);
   } catch (e) {
     return next(e);
@@ -35,8 +35,6 @@ router.post('/', auth, upload.single('image'), async (req, res, next) => {
     const postData = {
       user: req.user,
       title: req.body.title,
-      description: null,
-      image: null,
     };
 
     if (req.body.description) {
@@ -61,5 +59,14 @@ router.post('/', auth, upload.single('image'), async (req, res, next) => {
     return next(e);
   }
 });
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const post = await Post.find({_id: req.params.id});
+    res.send(post);
+  } catch (e) {
+    return next(e);
+  }
+})
 
 module.exports = router;

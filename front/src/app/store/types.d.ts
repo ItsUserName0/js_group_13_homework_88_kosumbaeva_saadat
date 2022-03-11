@@ -13,6 +13,9 @@ export type PostsState = {
   posts: Post[],
   fetchLoading: boolean,
   fetchError: null | string,
+  post: Post | null,
+  fetchPostLoading: boolean,
+  fetchPostError: null | string,
   createLoading: boolean,
   createError: null | CreatePostError,
 };
