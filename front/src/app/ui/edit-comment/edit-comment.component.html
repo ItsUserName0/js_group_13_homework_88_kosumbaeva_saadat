@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="user | async">
   <mat-card-content>
     <h1>Add comment</h1>
     <form fxLayout="column" #f=ngForm (ngSubmit)="createComment()">

@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const User = require('../models/User');
-const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -48,17 +47,6 @@ router.post('/sessions', async (req, res, next) => {
     await user.save();
 
     return res.send(user);
-  } catch (e) {
-    if (e instanceof mongoose.Error.ValidationError) {
-      return res.status(422).send(e);
-    }
-    return next(e);
-  }
-});
-
-router.get('/secret', auth, async (req, res, next) => {
-  try {
-    return res.send({message: 'Hello, ' + req.user.email});
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
       return res.status(422).send(e);
